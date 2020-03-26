@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ad11eb24-d2fd-4067-8844-8d9593743dc6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZWB62EGdavVVTAWE286etFVKC6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="TicTacToe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AITTT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TicTacToe.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.TicTacToe" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ad11eb24-d2fd-4067-8844-8d9593743dc6" name="Default Changelist" comment="" />
+      <created>1584944791008</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584944791008</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="548" y="330" key="#TicTacToe" timestamp="1585012686909">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="548" y="330" key="#TicTacToe/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585012686909" />
+    <state x="732" y="600" key="FileChooserDialogImpl" timestamp="1584944897046">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="732" y="600" key="FileChooserDialogImpl/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1584944897046" />
+    <state width="1342" height="369" key="GridCell.Tab.0.bottom" timestamp="1585201602873">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="369" key="GridCell.Tab.0.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585201602873" />
+    <state width="1342" height="369" key="GridCell.Tab.0.center" timestamp="1585201602872">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="369" key="GridCell.Tab.0.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585201602872" />
+    <state width="1342" height="369" key="GridCell.Tab.0.left" timestamp="1585201602872">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="369" key="GridCell.Tab.0.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585201602872" />
+    <state width="1342" height="369" key="GridCell.Tab.0.right" timestamp="1585201602873">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="369" key="GridCell.Tab.0.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585201602873" />
+    <state width="1342" height="315" key="GridCell.Tab.1.bottom" timestamp="1585198339982">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="315" key="GridCell.Tab.1.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339982" />
+    <state width="1342" height="315" key="GridCell.Tab.1.center" timestamp="1585198339981">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="315" key="GridCell.Tab.1.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339981" />
+    <state width="1342" height="315" key="GridCell.Tab.1.left" timestamp="1585198339981">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="315" key="GridCell.Tab.1.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339981" />
+    <state width="1342" height="315" key="GridCell.Tab.1.right" timestamp="1585198339982">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="1342" height="315" key="GridCell.Tab.1.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339982" />
+    <state x="340" y="336" key="SettingsEditor" timestamp="1584975862716">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="340" y="336" key="SettingsEditor/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1584975862716" />
+    <state width="500" height="400" key="SwitcherDM" timestamp="1585181056750">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="500" height="400" key="SwitcherDM/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585181056750" />
+    <state x="524" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1585077438629">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="524" y="530" key="com.intellij.ide.util.TipDialog/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585077438629" />
+    <state x="869" y="335" key="refactoring.ChangeSignatureDialog" timestamp="1585081538071">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="869" y="335" key="refactoring.ChangeSignatureDialog/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585081538071" />
+    <state x="772" y="331" width="670" height="676" key="search.everywhere.popup" timestamp="1585061872650">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state x="772" y="331" width="670" height="676" key="search.everywhere.popup/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585061872650" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TicTacToe.py</url>
+          <line>410</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
