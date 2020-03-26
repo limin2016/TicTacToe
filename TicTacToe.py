@@ -20,6 +20,9 @@ class TicTacToe(object):
         self.teamId = teamId
        	self.useragent = UserAgent().random
         self.CNT = 0
+        self.waiting = 20
+        self.layer = 1
+        self.numberOfBoard = 0
 
     def createAGame(self, teamId1, teamId2):
         # use API to create a game
@@ -49,7 +52,7 @@ class TicTacToe(object):
         # use API to make a move
         url = "https://www.notexponential.com/aip2pgaming/api/index.php"
 
-        payload = {'teamId': '1212',
+        payload = {'teamId': self.teamId,
                    'move': move,
                    'type': 'move',
                    'gameId': gameId}
@@ -164,7 +167,7 @@ class TicTacToe(object):
 
 
     def createTree(self, fatherBoard, layer):
-        if layer>1:
+        if layer>self.layer:
             return
         if self.evaluationFunction(fatherBoard.board)==100:
             fatherBoard.score = 100
@@ -188,9 +191,10 @@ class TicTacToe(object):
                         newBoard.newX = index1
                         newBoard.newY = index2
                         newBoard.score = 101
-                    if layer == 1:
+                    if layer == self.layer:
                         newBoard.score = self.evaluationFunction(newBoard.board)
                     fatherBoard.next.append(copy.deepcopy(newBoard))
+                    self.numberOfBoard = self.numberOfBoard + 1
                     # print(newBoard.board)
                     # print('')
                     self.CNT = self.CNT + 1
@@ -230,25 +234,11 @@ class TicTacToe(object):
                 if i.socre <= currentBoard.score:
                     currentBoard.score = i.socre
         return [currentBoard.score, coordinate]
-        # for i in currentBoard.next:
-        #     res = self.searchTree(i, layer + 1)
-        #     a = currentBoard.score
-        #     if layer%2==0:
-        #         if res[0] >= currentBoard.score:
-        #             currentBoard.score  = res[0]
-        #             coordinate = [res[1], res[2]]
-        #         #currentBoard.score = max(self.searchTree(i, layer + 1)[0], currentBoard.score)
-        #     else:
-        #         if res[0] <= currentBoard.score:
-        #             currentBoard.score = res[0]
-        #             coordinate = [res[1], res[2]]
-        #         #currentBoard.score = min(self.searchTree(i, layer+1)[0], currentBoard.score)
-        # return  [currentBoard.score, coordinate[0], coordinate[1]]
-
 
 
     def nextMove(self):
         self.board.score = -101
+        self.numberOfBoard = 0
         # self.board.board[0][0] = 'O'
         initialBoard = copy.deepcopy(self.board)
         self.createTree(initialBoard, 0)
@@ -261,6 +251,7 @@ class TicTacToe(object):
         # self.board.board[nextX][nextY] = 'O'
         # print(str(nextX)+','+str(nextY))
         # print(self.board.board, '\n')
+        print('the number of board is ', self.numberOfBoard)
         return [nextX, nextY]
 
 
@@ -313,8 +304,8 @@ class TicTacToe(object):
                         if tempMoveId == lastMoveId:
                             time.sleep(1)
                             waitTimes = waitTimes + 1
-                            if waitTimes > 30:
-                                print('Game Over!')
+                            if waitTimes > self.waiting:
+                                print('Congratulation! You won!')
                                 return
                             print('Waiting to move...')
                         else:
@@ -328,11 +319,16 @@ class TicTacToe(object):
                             move = self.nextMove()
                             responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
                             if responseMakeAMove['code'] == 'FAIL':
-                                print(responseMakeAMove)
+                                # print(responseMakeAMove)
+                                winSignal = 'Cannot make move - Game is no longer open: '+str(gameId)
+                                if responseMakeAMove['message']==winSignal:
+                                	print('Sorry, the opponent Won!')
+                                	return
                                 print(responseMakeAMove['message'])
                                 return -1
                             lastMoveId = str(responseMakeAMove['moveId'])
                             self.board.board[move[0]][move[1]] = 'O'
+                            waitTimes = 0
                             print(str(move[0]) + ',' + str(move[1]))
                             print(self.board.board, '\n')
         # move second
@@ -340,16 +336,16 @@ class TicTacToe(object):
             while True:
                 cnt = 0
                 # test if your opponent make the first move
-                while True and cnt <= 30:
+                while True and cnt <= self.waiting:
                     responseGetMoves = self.getMoves(str(gameId), '1')
                     if responseGetMoves['code'] == 'FAIL':
-                        print(responseGetMoves['message'], '! Wating to move...')
+                        print(responseGetMoves['message'], '! Waitng to move...')
                         cnt = cnt + 1
                         time.sleep(1)
                     else:
                         break
 
-                if cnt > 30:
+                if cnt > self.waiting:
                     print(r"Game Over! The opponent didn't give the first move!")
                     return -1
                 responseGetMoves = self.getMoves(str(gameId), '1')
@@ -379,8 +375,8 @@ class TicTacToe(object):
                     if tempMoveId == lastMoveId:
                         time.sleep(1)
                         waitingTimes = waitingTimes + 1
-                        if waitingTimes > 30:
-                            print('Game Over!')
+                        if waitingTimes > self.waiting:
+                            print('Congratulation! You won!')
                             return
                         print('Waiting to move...')
                     else:
@@ -392,13 +388,17 @@ class TicTacToe(object):
                         move = self.nextMove()
                         responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
                         if responseMakeAMove['code'] == 'FAIL':
+                            winSignal = 'Cannot make move - Game is no longer open: ' + str(gameId)
+                            if responseMakeAMove['message'] == winSignal:
+                                print('Sorry, the opponent Won!')
+                                return
                             print(responseMakeAMove['message'])
                             return -1
                         lastMoveId = str(responseMakeAMove['moveId'])
                         self.board.board[move[0]][move[1]] = 'X'
                         print(str(move[0]) + ',' + str(move[1]))
                         print(self.board.board, '\n')
-
+                        waitingTimes = 0
 
 
 
@@ -407,5 +407,5 @@ class TicTacToe(object):
 
 
 player1 = TicTacToe('860', '1212')
-player1.AIMove(True, False, '1221')
+player1.AIMove(False, False, '1221', '190')
 # player1.nextMove()
