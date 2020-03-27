@@ -18,9 +18,9 @@ class TicTacToe(object):
         self.board = Board()
         self.consecutive = 6
         self.teamId = teamId
-       	self.useragent = UserAgent().random
+        self.useragent = UserAgent().random
         self.CNT = 0
-        self.waiting = 20
+        self.waiting = 30
         self.layer = 1
         self.numberOfBoard = 0
 
@@ -156,6 +156,87 @@ class TicTacToe(object):
                     consecutiveX = 0
 
         # diagonal
+        lengthOfRow = 12
+        for i in range(lengthOfRow):
+            x = i
+            y = 0
+            consecutiveO = 0
+            consecutiveX = 0
+            while (x>=0 and x<lengthOfRow and y>=0 and y<lengthOfRow):
+                if board[x][y] == 'O':
+                    consecutiveO = consecutiveO + 1
+                    maxConsecutiveO = max(consecutiveO, maxConsecutiveO)
+                    consecutiveX = 0
+                elif board[x][y] == 'X':
+                    consecutiveX = consecutiveO + 1
+                    maxConsecutiveX = max(consecutiveX, maxConsecutiveX)
+                    consecutiveO = 0
+                else:
+                    consecutiveO = 0
+                    consecutiveX = 0
+                x = x - 1
+                y = y - 1
+
+        for i in range(1,lengthOfRow):
+            x = lengthOfRow - 1
+            y = i
+            consecutiveO = 0
+            consecutiveX = 0
+            while (x>=0 and x<lengthOfRow and y>=0 and y<lengthOfRow):
+                if board[x][y] == 'O':
+                    consecutiveO = consecutiveO + 1
+                    maxConsecutiveO = max(consecutiveO, maxConsecutiveO)
+                    consecutiveX = 0
+                elif board[x][y] == 'X':
+                    consecutiveX = consecutiveO + 1
+                    maxConsecutiveX = max(consecutiveX, maxConsecutiveX)
+                    consecutiveO = 0
+                else:
+                    consecutiveO = 0
+                    consecutiveX = 0
+                x = x - 1
+                y = y - 1
+
+        for i in range(lengthOfRow)[::-1]:
+            x = 0
+            y = i
+            consecutiveO = 0
+            consecutiveX = 0
+            while (x>=0 and x<lengthOfRow and y>=0 and y<lengthOfRow):
+                if board[x][y] == 'O':
+                    consecutiveO = consecutiveO + 1
+                    maxConsecutiveO = max(consecutiveO, maxConsecutiveO)
+                    consecutiveX = 0
+                elif board[x][y] == 'X':
+                    consecutiveX = consecutiveO + 1
+                    maxConsecutiveX = max(consecutiveX, maxConsecutiveX)
+                    consecutiveO = 0
+                else:
+                    consecutiveO = 0
+                    consecutiveX = 0
+                x = x + 1
+                y = y + 1
+
+        for i in range(1,lengthOfRow):
+            x = i
+            y = 0
+            consecutiveO = 0
+            consecutiveX = 0
+            while (x>=0 and x<lengthOfRow and y>=0 and y<lengthOfRow):
+                if board[x][y] == 'O':
+                    consecutiveO = consecutiveO + 1
+                    maxConsecutiveO = max(consecutiveO, maxConsecutiveO)
+                    consecutiveX = 0
+                elif board[x][y] == 'X':
+                    consecutiveX = consecutiveO + 1
+                    maxConsecutiveX = max(consecutiveX, maxConsecutiveX)
+                    consecutiveO = 0
+                else:
+                    consecutiveO = 0
+                    consecutiveX = 0
+                x = x + 1
+                y = y + 1
+
         ScoreO = maxConsecutiveO*100//6
         ScoreX = maxConsecutiveX*100//6
         # print('maxConsecutiveO = ', ScoreO)
@@ -219,7 +300,7 @@ class TicTacToe(object):
             # print(currentBoard.board)
             # print('')
             b = currentBoard.score
-            return [currentBoard.score, currentBoard.newX, currentBoard.newY]
+            return [currentBoard.score, [currentBoard.newX, currentBoard.newY]]
         coordinate = []
         c = currentBoard.score
         currentBoard.score = currentBoard.next[0].score
@@ -320,10 +401,13 @@ class TicTacToe(object):
                             responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
                             if responseMakeAMove['code'] == 'FAIL':
                                 # print(responseMakeAMove)
+                                if len(responseMakeAMove)==1:
+                                    print("Game Over! It's a draw'")
+                                    return
                                 winSignal = 'Cannot make move - Game is no longer open: '+str(gameId)
                                 if responseMakeAMove['message']==winSignal:
-                                	print('Sorry, the opponent Won!')
-                                	return
+                                    print('Sorry, the opponent Won!')
+                                    return
                                 print(responseMakeAMove['message'])
                                 return -1
                             lastMoveId = str(responseMakeAMove['moveId'])
@@ -388,6 +472,9 @@ class TicTacToe(object):
                         move = self.nextMove()
                         responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
                         if responseMakeAMove['code'] == 'FAIL':
+                            if len(responseMakeAMove) == 1:
+                                print("Game Over! It's a draw'")
+                                return
                             winSignal = 'Cannot make move - Game is no longer open: ' + str(gameId)
                             if responseMakeAMove['message'] == winSignal:
                                 print('Sorry, the opponent Won!')
@@ -407,5 +494,17 @@ class TicTacToe(object):
 
 
 player1 = TicTacToe('860', '1212')
-player1.AIMove(False, False, '1221', '190')
+player1.AIMove(False, False, '1221', '211')
 # player1.nextMove()
+# a = np.array([['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+#  ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['O', 'O', 'O', 'O', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', '-', '-', 'X', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', '-', 'X', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', '-', 'X', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', '-', 'X', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', 'X', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['X', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']])
