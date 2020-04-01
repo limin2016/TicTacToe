@@ -479,15 +479,12 @@ class TicTacToe(object):
 
                 if numberOfCurrentChess3==5:
                     if self.checkIfoverFlow(indexOfRow-3) and self.checkIfoverFlow(indexOfColumn-3) and self.checkIfoverFlow(indexOfRow+3) and self.checkIfoverFlow(indexOfColumn+3):
-                        if board[indexOfRow - 3][indexOfColumn - 3] == '-' and board[indexOfRow + 3][
-                            indexOfColumn + 3] == '-':
+                        if board[indexOfRow - 3][indexOfColumn - 3] == '-' and board[indexOfRow + 3][indexOfColumn + 3] == '-':
                             if currentChess == self.symbol:
                                 rlt = min(rlt, 9800)
                             else:
                                 rlt = min(rlt, -9900)
-                        elif board[indexOfRow - 3][indexOfColumn - 3] == '-' or board[indexOfRow + 3][
-                            indexOfColumn + 3] == '-'[
-                            indexOfColumn + 3] == '-':
+                        elif board[indexOfRow - 3][indexOfColumn - 3] == '-' or board[indexOfRow + 3][indexOfColumn + 3] == '-':
                             if currentChess == self.symbol:
                                 rlt = min(rlt, 9400)
                             else:
@@ -518,14 +515,12 @@ class TicTacToe(object):
 
                 if numberOfCurrentChess4 == 5:
                     if self.checkIfoverFlow(indexOfRow+3) and self.checkIfoverFlow(indexOfColumn-3) and self.checkIfoverFlow(indexOfRow-3) and self.checkIfoverFlow(indexOfColumn+3):
-                        if board[indexOfRow + 3][indexOfColumn - 3] == '-' and board[indexOfRow - 3][
-                            indexOfColumn + 3] == '-':
+                        if board[indexOfRow + 3][indexOfColumn - 3] == '-' and board[indexOfRow - 3][indexOfColumn + 3] == '-':
                             if currentChess == self.symbol:
                                 rlt = min(rlt, 9800)
                             else:
                                 rlt = min(rlt, -9900)
-                        elif board[indexOfRow + 3][indexOfColumn - 3] == '-' or board[indexOfRow - 3][
-                            indexOfColumn + 3] == '-':
+                        elif board[indexOfRow + 3][indexOfColumn - 3] == '-' or board[indexOfRow - 3][indexOfColumn + 3] == '-':
                             if currentChess == self.symbol:
                                 rlt = min(rlt,9400)
                             else:
