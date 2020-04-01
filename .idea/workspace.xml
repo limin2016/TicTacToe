@@ -32,7 +32,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.TicTacToe">
     <configuration name="TicTacToe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AITTT" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,9 +54,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AITTT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.TicTacToe" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -82,42 +104,42 @@
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
     <state x="732" y="600" key="FileChooserDialogImpl/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1584944897046" />
-    <state width="1259" height="257" key="GridCell.Tab.0.bottom" timestamp="1585265178921">
-      <screen x="0" y="23" width="1280" height="716" />
-    </state>
-    <state width="1259" height="257" key="GridCell.Tab.0.bottom/0.23.1280.716@0.23.1280.716" timestamp="1585265178921" />
-    <state width="1342" height="349" key="GridCell.Tab.0.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585262280793" />
-    <state width="1259" height="257" key="GridCell.Tab.0.center" timestamp="1585265178920">
-      <screen x="0" y="23" width="1280" height="716" />
-    </state>
-    <state width="1259" height="257" key="GridCell.Tab.0.center/0.23.1280.716@0.23.1280.716" timestamp="1585265178920" />
-    <state width="1342" height="349" key="GridCell.Tab.0.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585262280792" />
-    <state width="1259" height="257" key="GridCell.Tab.0.left" timestamp="1585265178920">
-      <screen x="0" y="23" width="1280" height="716" />
-    </state>
-    <state width="1259" height="257" key="GridCell.Tab.0.left/0.23.1280.716@0.23.1280.716" timestamp="1585265178920" />
-    <state width="1342" height="349" key="GridCell.Tab.0.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585262280791" />
-    <state width="1259" height="257" key="GridCell.Tab.0.right" timestamp="1585265178921">
-      <screen x="0" y="23" width="1280" height="716" />
-    </state>
-    <state width="1259" height="257" key="GridCell.Tab.0.right/0.23.1280.716@0.23.1280.716" timestamp="1585265178921" />
-    <state width="1342" height="349" key="GridCell.Tab.0.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585262280792" />
-    <state width="1342" height="315" key="GridCell.Tab.1.bottom" timestamp="1585198339982">
+    <state width="1281" height="711" key="GridCell.Tab.0.bottom" timestamp="1585729069826">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
-    <state width="1342" height="315" key="GridCell.Tab.1.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339982" />
-    <state width="1342" height="315" key="GridCell.Tab.1.center" timestamp="1585198339981">
+    <state width="1259" height="118" key="GridCell.Tab.0.bottom/0.23.1280.716@0.23.1280.716" timestamp="1585280901430" />
+    <state width="1281" height="711" key="GridCell.Tab.0.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585729069826" />
+    <state width="1281" height="711" key="GridCell.Tab.0.center" timestamp="1585729069824">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
-    <state width="1342" height="315" key="GridCell.Tab.1.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339981" />
-    <state width="1342" height="315" key="GridCell.Tab.1.left" timestamp="1585198339981">
+    <state width="1259" height="118" key="GridCell.Tab.0.center/0.23.1280.716@0.23.1280.716" timestamp="1585280901429" />
+    <state width="1281" height="711" key="GridCell.Tab.0.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585729069824" />
+    <state width="1281" height="711" key="GridCell.Tab.0.left" timestamp="1585729069824">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
-    <state width="1342" height="315" key="GridCell.Tab.1.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339981" />
-    <state width="1342" height="315" key="GridCell.Tab.1.right" timestamp="1585198339982">
+    <state width="1259" height="118" key="GridCell.Tab.0.left/0.23.1280.716@0.23.1280.716" timestamp="1585280901429" />
+    <state width="1281" height="711" key="GridCell.Tab.0.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585729069824" />
+    <state width="1281" height="711" key="GridCell.Tab.0.right" timestamp="1585729069825">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
-    <state width="1342" height="315" key="GridCell.Tab.1.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585198339982" />
+    <state width="1259" height="118" key="GridCell.Tab.0.right/0.23.1280.716@0.23.1280.716" timestamp="1585280901430" />
+    <state width="1281" height="711" key="GridCell.Tab.0.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585729069825" />
+    <state width="2330" height="315" key="GridCell.Tab.1.bottom" timestamp="1585691574142">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="2330" height="315" key="GridCell.Tab.1.bottom/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585691574142" />
+    <state width="2330" height="315" key="GridCell.Tab.1.center" timestamp="1585691574140">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="2330" height="315" key="GridCell.Tab.1.center/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585691574140" />
+    <state width="2330" height="315" key="GridCell.Tab.1.left" timestamp="1585691574140">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="2330" height="315" key="GridCell.Tab.1.left/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585691574140" />
+    <state width="2330" height="315" key="GridCell.Tab.1.right" timestamp="1585691574141">
+      <screen x="0" y="23" width="2560" height="1350" />
+    </state>
+    <state width="2330" height="315" key="GridCell.Tab.1.right/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585691574141" />
     <state x="340" y="336" key="SettingsEditor" timestamp="1584975862716">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
@@ -126,10 +148,10 @@
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
     <state width="500" height="400" key="SwitcherDM/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585181056750" />
-    <state x="524" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1585077438629">
+    <state x="524" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1585524426002">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
-    <state x="524" y="530" key="com.intellij.ide.util.TipDialog/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585077438629" />
+    <state x="524" y="530" key="com.intellij.ide.util.TipDialog/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585524426002" />
     <state x="869" y="335" key="refactoring.ChangeSignatureDialog" timestamp="1585081538071">
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
@@ -138,5 +160,16 @@
       <screen x="0" y="23" width="2560" height="1350" />
     </state>
     <state x="772" y="331" width="670" height="676" key="search.everywhere.popup/2560.286.1280.777/0.23.2560.1350@0.23.2560.1350" timestamp="1585061872650" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TicTacToe.py</url>
+          <line>1422</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
