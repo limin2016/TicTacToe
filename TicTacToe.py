@@ -694,7 +694,7 @@ class TicTacToe(object):
                 if currentChess == '-':
                     continue
                 # from top to bot
-                for i in range(1, 3):
+                for i in range(1, 2):
                     x = indexOfRow - i
                     y = indexOfColumn
                     if self.checkIfoverFlow(x):
@@ -705,7 +705,7 @@ class TicTacToe(object):
                             break
                     else:
                         break
-                for i in range(1, 4):
+                for i in range(1, 3):
                     x = indexOfRow + i
                     y = indexOfColumn
                     if self.checkIfoverFlow(x):
@@ -716,14 +716,20 @@ class TicTacToe(object):
                     else:
                         break
 
-                if numberOfCurrentChess1 == self.consecutive:
-                    if currentChess == self.symbol:
-                        rlt = min(rlt, 10000)
-                    else:
-                        rlt = min(rlt, -10000)
+                if numberOfCurrentChess1 == 4:
+                    if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(indexOfRow + 3):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 3][
+                                indexOfColumn] == self.symbol:
+                                rlt = min(rlt, 9750)
+                        else:
+                            if board[indexOfRow - 2][indexOfColumn] == self.opponentSymbol or board[indexOfRow + 3][
+                                indexOfColumn] == self.opponentSymbol:
+                                rlt = min(rlt, 9300)
+
                 # from left to right
                 numberOfCurrentChess2 = 1
-                for i in range(1, 3):
+                for i in range(1, 2):
                     x = indexOfRow
                     y = indexOfColumn - i
                     if self.checkIfoverFlow(y):
@@ -732,9 +738,8 @@ class TicTacToe(object):
                         else:
                             break
                     else:
-                        flag = 1
                         break
-                for i in range(1, 4):
+                for i in range(1, 3):
                     x = indexOfRow
                     y = indexOfColumn + i
                     if self.checkIfoverFlow(y):
@@ -745,14 +750,19 @@ class TicTacToe(object):
                     else:
                         break
 
-                if numberOfCurrentChess2 == self.consecutive:
-                    if currentChess == self.symbol:
-                        rlt = min(rlt, 10000)
-                    else:
-                        rlt = min(rlt, -10000)
+                if numberOfCurrentChess2 == 4:
+                    if self.checkIfoverFlow(indexOfColumn - 2) and self.checkIfoverFlow(indexOfColumn + 3):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
+                                indexOfColumn + 3] == self.symbol:
+                                rlt = min(rlt, 9750)
+                        else:
+                            if board[indexOfRow][indexOfColumn - 2] == self.opponentSymbol or board[indexOfRow][
+                                indexOfColumn + 3] == self.opponentSymbol:
+                                rlt = min(rlt, 9300)
                 # from top left to bot right
                 numberOfCurrentChess3 = 1
-                for i in range(1, 3):
+                for i in range(1, 2):
                     x = indexOfRow - i
                     y = indexOfColumn - i
                     if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
@@ -763,7 +773,7 @@ class TicTacToe(object):
                     else:
                         break
 
-                for i in range(1, 4):
+                for i in range(1, 3):
                     x = indexOfRow + i
                     y = indexOfColumn + i
                     if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
@@ -774,11 +784,19 @@ class TicTacToe(object):
                     else:
                         break
 
-                if numberOfCurrentChess3 == self.consecutive:
-                    if currentChess == self.symbol:
-                        rlt = min(rlt, 10000)
-                    else:
-                        rlt = min(rlt, -10000)
+                if numberOfCurrentChess3 == 4:
+                    if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
+                            indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow + 3) and self.checkIfoverFlow(
+                            indexOfColumn + 3):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 3][
+                                indexOfColumn + 3] == self.symbol:
+                                rlt = min(rlt, 9750)
+                        else:
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.opponentSymbol or board[indexOfRow + 3][
+                                indexOfColumn + 3] == self.opponentSymbol:
+                                rlt = min(rlt, 9300)
+
                 # form bot left to top right
                 numberOfCurrentChess4 = 1
                 for i in range(1, 3):
@@ -791,7 +809,7 @@ class TicTacToe(object):
                             break
                     else:
                         break
-                for i in range(1, 4):
+                for i in range(1, 2):
                     x = indexOfRow - i
                     y = indexOfColumn + i
                     if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
@@ -802,14 +820,20 @@ class TicTacToe(object):
                     else:
                         break
 
-                if numberOfCurrentChess4 == self.consecutive:
-                    if currentChess == self.symbol:
-                        rlt = min(rlt, 10000)
-                    else:
-                        rlt = min(rlt, -10000)
-
+                if numberOfCurrentChess4 == 4:
+                    if self.checkIfoverFlow(indexOfRow + 3) and self.checkIfoverFlow(
+                            indexOfColumn - 3) and self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
+                            indexOfColumn + 2):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow + 3][indexOfColumn - 3] == self.symbol or board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9750)
+                        else:
+                            if board[indexOfRow + 3][indexOfColumn - 3] == self.opponentSymbol or board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.opponentSymbol:
+                                rlt = min(rlt, 9300)
         if rlt == 100000:
-            return -1  # represent there is no LianWu
+            return -1
         else:
             return rlt
 
@@ -955,6 +979,158 @@ class TicTacToe(object):
         else:
             return rlt
 
+    def six(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfCurrentChess1 = 1
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess1 = numberOfCurrentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess1 = numberOfCurrentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess1 == 3:
+                    if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(indexOfRow + 2):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 2][
+                                indexOfColumn] == self.symbol:
+                                rlt = min(rlt, 9760)
+                        else:
+                            if board[indexOfRow - 2][indexOfColumn] == self.opponentSymbol or board[indexOfRow + 2][
+                                indexOfColumn] == self.opponentSymbol:
+                                rlt = min(rlt, 9200)
+
+                # from left to right
+                numberOfCurrentChess2 = 1
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess2 = numberOfCurrentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess2 = numberOfCurrentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess2 == 3:
+                    if self.checkIfoverFlow(indexOfColumn - 2) and self.checkIfoverFlow(indexOfColumn + 2):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9760)
+                        else:
+                            if board[indexOfRow][indexOfColumn - 2] == self.opponentSymbol or board[indexOfRow][
+                                indexOfColumn + 2] == self.opponentSymbol:
+                                rlt = min(rlt, 9200)
+                # from top left to bot right
+                numberOfCurrentChess3 = 1
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess3 = numberOfCurrentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess3 = numberOfCurrentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess3 == 3:
+                    if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
+                            indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow + 2) and self.checkIfoverFlow(
+                        indexOfColumn + 2):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9760)
+                        else:
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.opponentSymbol or board[indexOfRow + 2][
+                                indexOfColumn + 2] == self.opponentSymbol:
+                                rlt = min(rlt, 9200)
+
+                # form bot left to top right
+                numberOfCurrentChess4 = 1
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess4 = numberOfCurrentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess4 = numberOfCurrentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess4 == 3:
+                    if self.checkIfoverFlow(indexOfRow + 2) and self.checkIfoverFlow(
+                            indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
+                        indexOfColumn + 2):
+                        if currentChess == self.opponentSymbol:
+                            if board[indexOfRow + 2][indexOfColumn - 2] == self.symbol or board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9760)
+                        else:
+                            if board[indexOfRow + 3][indexOfColumn - 3] == self.opponentSymbol or board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.opponentSymbol:
+                                rlt = min(rlt, 9200)
+        if rlt == 100000:
+            return -1
+        else:
+            return rlt
+
     def newEvaluationFunction(self, board):
         rlt = 100000
         tmpRlt = self.one(board)
@@ -974,6 +1150,10 @@ class TicTacToe(object):
             rlt = min(rlt, tmpRlt)
 
         tmpRlt = self.five(board)
+        if tmpRlt != -1:
+            rlt = min(rlt, tmpRlt)
+
+        tmpRlt = self.six(board)
         if tmpRlt != -1:
             rlt = min(rlt, tmpRlt)
 
@@ -1404,11 +1584,11 @@ player1 = TicTacToe('860', '1212')
 player1.AIMove(True, True, '1221')
 player1.nextMove()
 # a = np.array([
-# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-# ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['O', '-', 'O', 'O', 'O', '-', '-', '-', '-', 'X', '-', '-'],
+# ['X', 'X', '-', '-', '-', '-', '-', '-', 'O', '-', '-', '-'],
+# ['-', '-', 'X', '-', '-', '-', '-', 'O', '-', '-', '-', '-'],
+# ['X', '-', '-', 'X', '-', '-', 'O', '-', '-', '-', '-', '-'],
+# ['X', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
@@ -1416,3 +1596,4 @@ player1.nextMove()
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']])
+# player1.six(a)
