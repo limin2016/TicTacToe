@@ -20,7 +20,7 @@ class TicTacToe(object):
         self.teamId = teamId
         self.useragent = UserAgent().random
         self.CNT = 0
-        self.waiting = 300
+        self.waiting = 600
         self.layer = 0
         self.numberOfBoard = 0
         self.symbol = 'O'
@@ -111,7 +111,7 @@ class TicTacToe(object):
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         return response.json()
-    
+
     def checkIfWin(self, board):
         myChess = 0
         opponentChess = 0
@@ -230,15 +230,22 @@ class TicTacToe(object):
                     consecutiveOpponentChess = 0
                 x = x + 1
                 y = y + 1
+        flag = 0
+        for i in board:
+            for j in i:
+                if j=='-':
+                    flag = 1
+                    break
+            if flag==1:
+                break
 
-        print('mychess = ', myChess)
-        print('opponentChess = ', opponentChess)
-        if myChess<6 and opponentChess<6:
+        if myChess<6 and opponentChess<6 and flag==0:
             return 0 # draw
         elif opponentChess==6:
             return 1 # opponent win
         elif myChess==6:
             return 2 # you win
+        return -1
 
     def checkIfoverFlow(self, num):
         if num>=0 and num<self.lengthOfRow:
@@ -369,7 +376,7 @@ class TicTacToe(object):
                         rlt = min(rlt, -10000)
 
         if rlt==100000:
-            return -1 #represent there is no LianWu
+            return 0 #represent there is no LianWu
         else:
             return rlt
 
@@ -526,7 +533,7 @@ class TicTacToe(object):
                             else:
                                 rlt = min(rlt, -9800)
         if rlt==100000:
-            return -1
+            return 0
         else:
             return rlt
 
@@ -681,7 +688,7 @@ class TicTacToe(object):
                                 rlt = min(rlt, -9800)
 
         if rlt==100000:
-            return -1 #represent there is no LianWu
+            return 0 #represent there is no LianWu
         else:
             return rlt
 
@@ -719,7 +726,10 @@ class TicTacToe(object):
                 if numberOfCurrentChess1 == 4:
                     if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(indexOfRow + 3):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 3][
+                            if board[indexOfRow - 2][indexOfColumn] == self.symbol and board[indexOfRow + 3][
+                                indexOfColumn] == self.symbol:
+                                rlt = min(rlt, 9751)
+                            elif board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 3][
                                 indexOfColumn] == self.symbol:
                                 rlt = min(rlt, 9750)
                         else:
@@ -753,7 +763,10 @@ class TicTacToe(object):
                 if numberOfCurrentChess2 == 4:
                     if self.checkIfoverFlow(indexOfColumn - 2) and self.checkIfoverFlow(indexOfColumn + 3):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
+                            if board[indexOfRow][indexOfColumn - 2] == self.symbol and board[indexOfRow][
+                                indexOfColumn + 3] == self.symbol:
+                                rlt = min(rlt, 9751)
+                            elif board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
                                 indexOfColumn + 3] == self.symbol:
                                 rlt = min(rlt, 9750)
                         else:
@@ -789,7 +802,10 @@ class TicTacToe(object):
                             indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow + 3) and self.checkIfoverFlow(
                             indexOfColumn + 3):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 3][
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol and board[indexOfRow + 3][
+                                indexOfColumn + 3] == self.symbol:
+                                rlt = min(rlt, 9751)
+                            elif board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 3][
                                 indexOfColumn + 3] == self.symbol:
                                 rlt = min(rlt, 9750)
                         else:
@@ -825,7 +841,10 @@ class TicTacToe(object):
                             indexOfColumn - 3) and self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
                             indexOfColumn + 2):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow + 3][indexOfColumn - 3] == self.symbol or board[indexOfRow - 2][
+                            if board[indexOfRow + 3][indexOfColumn - 3] == self.symbol and board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9751)
+                            elif board[indexOfRow + 3][indexOfColumn - 3] == self.symbol or board[indexOfRow - 2][
                                 indexOfColumn + 2] == self.symbol:
                                 rlt = min(rlt, 9750)
                         else:
@@ -833,7 +852,7 @@ class TicTacToe(object):
                                 indexOfColumn + 2] == self.opponentSymbol:
                                 rlt = min(rlt, 9300)
         if rlt == 100000:
-            return -1
+            return 0
         else:
             return rlt
 
@@ -975,7 +994,7 @@ class TicTacToe(object):
                             if currentChess == self.symbol:
                                 rlt = min(rlt, 9000)
         if rlt==100000:
-            return -1
+            return 0
         else:
             return rlt
 
@@ -1013,7 +1032,10 @@ class TicTacToe(object):
                 if numberOfCurrentChess1 == 3:
                     if self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(indexOfRow + 2):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 2][
+                            if board[indexOfRow - 2][indexOfColumn] == self.symbol and board[indexOfRow + 2][
+                                indexOfColumn] == self.symbol:
+                                rlt = min(rlt, 9761)
+                            elif board[indexOfRow - 2][indexOfColumn] == self.symbol or board[indexOfRow + 2][
                                 indexOfColumn] == self.symbol:
                                 rlt = min(rlt, 9760)
                         else:
@@ -1047,7 +1069,10 @@ class TicTacToe(object):
                 if numberOfCurrentChess2 == 3:
                     if self.checkIfoverFlow(indexOfColumn - 2) and self.checkIfoverFlow(indexOfColumn + 2):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
+                            if board[indexOfRow][indexOfColumn - 2] == self.symbol and board[indexOfRow][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9761)
+                            elif board[indexOfRow][indexOfColumn - 2] == self.symbol or board[indexOfRow][
                                 indexOfColumn + 2] == self.symbol:
                                 rlt = min(rlt, 9760)
                         else:
@@ -1083,7 +1108,10 @@ class TicTacToe(object):
                             indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow + 2) and self.checkIfoverFlow(
                         indexOfColumn + 2):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 2][
+                            if board[indexOfRow - 2][indexOfColumn - 2] == self.symbol and board[indexOfRow + 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9761)
+                            elif board[indexOfRow - 2][indexOfColumn - 2] == self.symbol or board[indexOfRow + 2][
                                 indexOfColumn + 2] == self.symbol:
                                 rlt = min(rlt, 9760)
                         else:
@@ -1119,50 +1147,1040 @@ class TicTacToe(object):
                             indexOfColumn - 2) and self.checkIfoverFlow(indexOfRow - 2) and self.checkIfoverFlow(
                         indexOfColumn + 2):
                         if currentChess == self.opponentSymbol:
-                            if board[indexOfRow + 2][indexOfColumn - 2] == self.symbol or board[indexOfRow - 2][
+                            if board[indexOfRow + 2][indexOfColumn - 2] == self.symbol and board[indexOfRow - 2][
+                                indexOfColumn + 2] == self.symbol:
+                                rlt = min(rlt, 9761)
+                            elif board[indexOfRow + 2][indexOfColumn - 2] == self.symbol or board[indexOfRow - 2][
                                 indexOfColumn + 2] == self.symbol:
                                 rlt = min(rlt, 9760)
                         else:
-                            if board[indexOfRow + 3][indexOfColumn - 3] == self.opponentSymbol or board[indexOfRow - 2][
+                            if board[indexOfRow + 2][indexOfColumn - 2] == self.opponentSymbol or board[indexOfRow - 2][
                                 indexOfColumn + 2] == self.opponentSymbol:
                                 rlt = min(rlt, 9200)
         if rlt == 100000:
-            return -1
+            return 0
         else:
             return rlt
 
-    def newEvaluationFunction(self, board):
+    #du qiang
+    def seven(self, board):
         rlt = 100000
-        tmpRlt = self.one(board)
-        if tmpRlt!=-1:
-            rlt = min(rlt, tmpRlt)
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfCurrentChess1 = 1
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess1 = numberOfCurrentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess1 = numberOfCurrentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
 
-        tmpRlt = self.two(board)
-        if tmpRlt!=-1:
-            rlt = min(rlt, tmpRlt)
+                if numberOfCurrentChess1 == 4:
+                    if self.checkIfoverFlow(indexOfRow+3)==False and self.checkIfoverFlow(indexOfRow-2):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow-2][indexOfColumn]==self.symbol:
+                                rlt = min(rlt, 9780)
 
-        tmpRlt = self.three(board)
-        if tmpRlt!=-1:
-            rlt = min(rlt, tmpRlt)
+                    if self.checkIfoverFlow(indexOfRow-2)==False and self.checkIfoverFlow(indexOfColumn+3):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow+3][indexOfColumn]==self.symbol:
+                                rlt = min(rlt, 9780)
 
-        tmpRlt = self.four(board)
-        if tmpRlt != -1:
-            rlt = min(rlt, tmpRlt)
+                # from left to right
+                numberOfCurrentChess2 = 1
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess2 = numberOfCurrentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess2 = numberOfCurrentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
 
-        tmpRlt = self.five(board)
-        if tmpRlt != -1:
-            rlt = min(rlt, tmpRlt)
+                if numberOfCurrentChess2 == 4:
+                    if self.checkIfoverFlow(indexOfColumn - 2)==False and self.checkIfoverFlow(indexOfColumn + 3):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow][indexOfColumn+3]==self.symbol:
+                                rlt = min(rlt, 9780)
 
-        tmpRlt = self.six(board)
-        if tmpRlt != -1:
-            rlt = min(rlt, tmpRlt)
+                    if self.checkIfoverFlow(indexOfColumn+3)==False and self.checkIfoverFlow(indexOfColumn-2):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow][indexOfColumn-2]==self.symbol:
+                                rlt = min(rlt, 9780)
 
-        if rlt!=100000:
-            return rlt
+                # from top left to bot right
+                numberOfCurrentChess3 = 1
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess3 = numberOfCurrentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess3 = numberOfCurrentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess3 == 4:
+                    if (self.checkIfoverFlow(indexOfRow-2)==False or self.checkIfoverFlow(indexOfColumn-2)==False) and self.checkIfoverFlow(indexOfRow + 3) and self.checkIfoverFlow(indexOfColumn+3):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow+3][indexOfColumn+3]==self.symbol:
+                                rlt = min(rlt, 9780)
+
+                    if (self.checkIfoverFlow(indexOfRow+3)==False or self.checkIfoverFlow(indexOfColumn+3)==False) and self.checkIfoverFlow(indexOfRow-2) and self.checkIfoverFlow(indexOfColumn-2):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow-2][indexOfColumn-2]==self.symbol:
+                                rlt = min(rlt, 9780)
+
+                # form bot left to top right
+                numberOfCurrentChess4 = 1
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess4 = numberOfCurrentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == currentChess:
+                            numberOfCurrentChess4 = numberOfCurrentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfCurrentChess4 == 4:
+                    if (self.checkIfoverFlow(indexOfRow-2)==False or self.checkIfoverFlow(indexOfColumn+2)==False) and self.checkIfoverFlow(indexOfRow + 3) and self.checkIfoverFlow(indexOfColumn-3):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow+3][indexOfColumn-3]==self.symbol:
+                                rlt = min(rlt, 9780)
+
+                    if (self.checkIfoverFlow(indexOfRow+3)==False or self.checkIfoverFlow(indexOfColumn-3)==False) and self.checkIfoverFlow(indexOfRow-2) and self.checkIfoverFlow(indexOfColumn+2):
+                        if currentChess==self.opponentSymbol:
+                            if board[indexOfRow-2][indexOfColumn+2]==self.symbol:
+                                rlt = min(rlt, 9780)
+
+        if rlt == 100000:
+            return 0
         else:
-            return self.evaluationFunction(board)
+            return rlt
+
+    #XXOXXX
+    def eight(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 3):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 4):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 3):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 4):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 3):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 4):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
 
 
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 4):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+
+        if rlt == 100000:
+            return 0  # represent there is no LianWu
+        else:
+            return rlt
+
+    #XXXOXX
+    def nine(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 4):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 4):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 4):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 4):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+
+        if rlt == 100000:
+            return 0  # represent there is no LianWu
+        else:
+            return rlt
+
+    #XXXXOX
+    def ten(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 5):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 5):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 5):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 5):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+
+        if rlt == 100000:
+            return 0  # represent there is no LianWu
+        else:
+            return rlt
+
+    #XOXXXX
+    def eleven(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess == '-':
+                    continue
+                # from top to bot
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1, 5):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 5):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 5):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 5):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 5:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9790)
+
+
+        if rlt == 100000:
+            return 0  # represent there is no LianWu
+        else:
+            return rlt
+
+    #XXOXX
+    def twelve(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess=='-':
+                    continue
+                # from top to bot
+                for i in range(1,3):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1,3):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 3):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        flag = 1
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 3):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 3):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 3):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 4:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9775)
+
+        if rlt==100000:
+            return 0 #represent there is no LianWu
+        else:
+            return rlt
+
+    #XXXOx
+    def thirteen(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess=='-':
+                    continue
+                # from top to bot
+                for i in range(1,4):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1,2):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 4):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        flag = 1
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 4):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 4):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 4:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9775)
+
+        if rlt==100000:
+            return 0 #represent there is no LianWu
+        else:
+            return rlt
+
+    #XOXXX
+    def fourteen(self, board):
+        rlt = 100000
+        for indexOfRow, valueOfRow in enumerate(board):
+            for indexOfColumn, valueOfColumn in enumerate(valueOfRow):
+                currentChess = valueOfColumn
+                numberOfOpponentChess1 = 0
+                if currentChess=='-':
+                    continue
+                # from top to bot
+                for i in range(1,2):
+                    x = indexOfRow - i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            flag = 1
+                            break
+                    else:
+                        break
+                for i in range(1,4):
+                    x = indexOfRow + i
+                    y = indexOfColumn
+                    if self.checkIfoverFlow(x):
+                        if board[x][y]==self.opponentSymbol:
+                            numberOfOpponentChess1 = numberOfOpponentChess1 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess1==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from left to right
+                numberOfOpponentChess2 = 0
+                for i in range(1, 2):
+                    x = indexOfRow
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        flag = 1
+                        break
+                for i in range(1, 4):
+                    x = indexOfRow
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess2 = numberOfOpponentChess2 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess2==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # from top left to bot right
+                numberOfOpponentChess3 = 0
+                for i in range(1, 2):
+                    x = indexOfRow - i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                for i in range(1, 4):
+                    x = indexOfRow + i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess3 = numberOfOpponentChess3 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess3==4:
+                    if currentChess ==self.symbol:
+                        rlt = min(rlt, 9775)
+
+                # form bot left to top right
+                numberOfOpponentChess4 = 0
+                for i in range(1, 2):
+                    x = indexOfRow + i
+                    y = indexOfColumn - i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+                for i in range(1, 4):
+                    x = indexOfRow - i
+                    y = indexOfColumn + i
+                    if self.checkIfoverFlow(x) and self.checkIfoverFlow(y):
+                        if board[x][y] == self.opponentSymbol:
+                            numberOfOpponentChess4 = numberOfOpponentChess4 + 1
+                        else:
+                            break
+                    else:
+                        break
+
+                if numberOfOpponentChess4 == 4:
+                    if currentChess == self.symbol:
+                        rlt = min(rlt, 9775)
+
+        if rlt==100000:
+            return 0 #represent there is no LianWu
+        else:
+            return rlt
 
     def evaluationFunction(self, board):
         myChess = 0
@@ -1283,8 +2301,106 @@ class TicTacToe(object):
                 x = x + 1
                 y = y + 1
 
-        return (consecutiveMyChess-consecutiveOpponentChess)*1000//6
+        return consecutiveMyChess*1000//6
 
+    def newEvaluationFunction(self, board):
+        rlt = 0
+        rlt1 = 0
+        tmpRlt = self.one(board)
+        if tmpRlt <0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt>0:
+            rlt = max(rlt, tmpRlt)
+
+
+        tmpRlt = self.two(board)
+        if tmpRlt <0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt>0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.three(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.four(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.five(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.six(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.seven(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.eight(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.nine(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.ten(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.eleven(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.twelve(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.thirteen(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        tmpRlt = self.fourteen(board)
+        if tmpRlt < 0:
+            rlt1 = min(rlt1, tmpRlt)
+        elif tmpRlt > 0:
+            rlt = max(rlt, tmpRlt)
+
+        if rlt1<0:
+            return rlt1
+        if rlt!=10000:
+            return rlt
+        return self.evaluationFunction(board)
+
+        # if rlt!=100000:
+        #     return rlt
+        # else:
+        #     return self.evaluationFunction(board)
 
     def createTree(self, fatherBoard, layer):
         if layer>self.layer:
@@ -1320,7 +2436,6 @@ class TicTacToe(object):
                     newBoard.board[index1][index2] = '-'
                     newBoard.newX = 0
                     newBoard.newY = 0
-
 
     def test(self, fatherBoard, layer):
         if layer>self.layer:
@@ -1364,7 +2479,6 @@ class TicTacToe(object):
                 print(i.board,'\n')
 
     def searchTree(self, currentBoard, layer):
-        # set values of states
         if currentBoard.next==[]:
             return [currentBoard.score, [currentBoard.newX, currentBoard.newY]]
         coordinate = []
@@ -1380,7 +2494,6 @@ class TicTacToe(object):
                     currentBoard.score = i.socre
         return [currentBoard.score, coordinate]
 
-
     def nextMove(self):
         self.board.score = -101
         self.numberOfBoard = 0
@@ -1390,7 +2503,6 @@ class TicTacToe(object):
         nextX = response[1][0]
         nextY = response[1][1]
         return [nextX, nextY]
-
 
     def AIMove(self, createAGame, preMove, enemyTeamId=0, enemyGameId=0):
         gameId = '0'
@@ -1422,14 +2534,28 @@ class TicTacToe(object):
             self.opponentSymbol = 'X'
             while True:
                 if cnt == 0:
+                    startTime = time.time()
                     move = self.nextMove()
                     responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
                     if responseMakeAMove['code'] == 'FAIL':
                         print(responseMakeAMove['message'])
                         return -1
                     self.board.board[move[0]][move[1]] = 'O'
+                    endTime = time.time()
+                    print('This step running ', endTime-startTime,'ms')
                     print(str(move[0]) + ',' + str(move[1]))
                     print(self.board.board, '\n')
+
+                    if self.checkIfWin(self.board.board)==2:
+                        print("You won.")
+                        return
+                    elif self.checkIfWin(self.board.board)==1:
+                        print('Opponent won.')
+                        return
+                    elif self.checkIfWin(self.board.board)==0:
+                        print("Draw.")
+                        return
+
                     lastMoveId = str(responseMakeAMove['moveId'])
                     cnt = cnt + 1
                 else:
@@ -1455,12 +2581,15 @@ class TicTacToe(object):
                                 return
                             print('Waiting to move...')
                         else:
+                            startTime = time.time()
                             moveX = int(responseGetMoves['moves'][0]['moveX'])
                             moveY = int(responseGetMoves['moves'][0]['moveY'])
                             symbol = responseGetMoves['moves'][0]['symbol']
                             self.board.board[moveX][moveY] = symbol
                             move = self.nextMove()
                             responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
+                            endTime = time.time()
+                            print('This step run ', endTime-startTime, 'ms')
                             if responseMakeAMove['code'] == 'FAIL':
                                 if len(responseMakeAMove)==1:
                                     print('only response one parameter')
@@ -1484,6 +2613,15 @@ class TicTacToe(object):
                             waitTimes = 0
                             print(str(move[0]) + ',' + str(move[1]))
                             print(self.board.board, '\n')
+                            if self.checkIfWin(self.board.board) == 2:
+                                print("You won.")
+                                return
+                            elif self.checkIfWin(self.board.board) == 1:
+                                print('Opponent won.')
+                                return
+                            elif self.checkIfWin(self.board.board) == 0:
+                                print("Draw.")
+                                return
         # move second
         else:
             self.symbol = 'X'
@@ -1503,6 +2641,7 @@ class TicTacToe(object):
                 if cnt > self.waiting:
                     print(r"Game Over! The opponent didn't give the first move!")
                     return -1
+                startTime = time.time()
                 responseGetMoves = self.getMoves(str(gameId), '1')
                 moveX = int(responseGetMoves['moves'][0]['moveX'])
                 moveY = int(responseGetMoves['moves'][0]['moveY'])
@@ -1511,6 +2650,8 @@ class TicTacToe(object):
 
                 move = self.nextMove()
                 responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
+                endTime = time.time()
+                print("This step run ", endTime-startTime, 'ms')
                 if responseMakeAMove['code'] == 'FAIL':
                     print(responseMakeAMove['message'])
                     return -1
@@ -1518,6 +2659,15 @@ class TicTacToe(object):
                 self.board.board[move[0]][move[1]] = 'X'
                 print(str(move[0]) + ',' + str(move[1]))
                 print(self.board.board, '\n')
+                if self.checkIfWin(self.board.board) == 2:
+                    print("You won.")
+                    return
+                elif self.checkIfWin(self.board.board) == 1:
+                    print('Opponent won.')
+                    return
+                elif self.checkIfWin(self.board.board) == 0:
+                    print("Draw.")
+                    return
 
                 # opponent give the first move
                 waitingTimes = 0
@@ -1542,12 +2692,15 @@ class TicTacToe(object):
                             return
                         print('Waiting to move...')
                     else:
+                        startTime = time.time()
                         moveX = int(responseGetMoves['moves'][0]['moveX'])
                         moveY = int(responseGetMoves['moves'][0]['moveY'])
                         symbol = responseGetMoves['moves'][0]['symbol']
                         self.board.board[moveX][moveY] = symbol
                         move = self.nextMove()
                         responseMakeAMove = self.makeAMove(str(move[0]) + ',' + str(move[1]), gameId)
+                        endTime = time.time()
+                        print('This step run ', endTime-startTime, 'ms')
                         if responseMakeAMove['code'] == 'FAIL':
                             if len(responseMakeAMove) == 1:
                                 print('move the same place.')
@@ -1576,6 +2729,15 @@ class TicTacToe(object):
                         self.board.board[move[0]][move[1]] = 'X'
                         print(str(move[0]) + ',' + str(move[1]))
                         print(self.board.board, '\n')
+                        if self.checkIfWin(self.board.board) == 2:
+                            print("You won.")
+                            return
+                        elif self.checkIfWin(self.board.board) == 1:
+                            print('Opponent won.')
+                            return
+                        elif self.checkIfWin(self.board.board) == 0:
+                            print("Draw.")
+                            return
                         waitingTimes = 0
 
 
@@ -1583,12 +2745,13 @@ class TicTacToe(object):
 player1 = TicTacToe('860', '1212')
 player1.AIMove(True, True, '1221')
 player1.nextMove()
+# player1.test(player1.board, 0)
 # a = np.array([
-# ['O', '-', 'O', 'O', 'O', '-', '-', '-', '-', 'X', '-', '-'],
-# ['X', 'X', '-', '-', '-', '-', '-', '-', 'O', '-', '-', '-'],
-# ['-', '-', 'X', '-', '-', '-', '-', 'O', '-', '-', '-', '-'],
-# ['X', '-', '-', 'X', '-', '-', 'O', '-', '-', '-', '-', '-'],
-# ['X', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['X', 'X', '-', 'X', 'X', '-', '-', '-', '-', '-', '-', '-'],
+# ['X', 'O', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['-', 'X', 'X', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['O', 'X', '-', 'X', '-', '-', '-', '-', '-', '-', '-', '-'],
+# ['X', '-', '-', '-', 'X', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
@@ -1596,4 +2759,6 @@ player1.nextMove()
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
 # ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']])
-# player1.six(a)
+# a= player1.fourteen(a)
+# print(a)
+# # player1.seven(a)
