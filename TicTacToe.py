@@ -2391,6 +2391,9 @@ class TicTacToe(object):
         elif tmpRlt > 0:
             rlt = max(rlt, tmpRlt)
 
+        #if u can win, ensure you win
+        if rlt==10000:
+            return rlt
         if rlt1<0:
             return rlt1
         if rlt!=10000:
